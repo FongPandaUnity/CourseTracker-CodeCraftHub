@@ -1,0 +1,49 @@
+Creating a simple personalized learning platform such as CodeCraftHub is a great beginner project! Here's a straightforward approach:
+1. Simple Project Structure
+
+plaintext
+codecrafthub/
+├── app.py              # Main Flask application
+├── courses.json        # JSON file for data storage (auto-created)
+├── requirements.txt    # Python dependencies
+└── README.md          # Project documentation
+2. REST API Endpoints
+You should create these basic endpoints:
+
+Course Management:
+
+POST /api/courses - Add a new course
+GET /api/courses - Get all courses
+GET /api/courses/<id> - Get a specific course
+PUT /api/courses/<id> - Update a course
+DELETE /api/courses/<id> - Delete a course
+Optional Bonus Endpoints:
+
+GET /api/courses/stats - Get statistics about courses
+GET /api/courses/search?q=term - Search courses
+3. Data Storage with JSON
+Course Data Structure:
+
+
+json
+{
+  "id": 1,
+  "name": "Python Basics",
+  "description": "Learn Python fundamentals",
+  "target_date": "2025-12-31",
+  "status": "Not Started",
+  "created_at": "2025-11-04 10:30:00"
+}
+How to Store/Retrieve:
+
+Use Python's json module to read/write
+Load all courses at the start of each request
+Save back to file after any changes
+The file will be created automatically if it doesn't exist
+4. Next Steps
+Start by creating app.py with these helper functions:
+
+load_courses() - Read from JSON file
+save_courses(courses) - Write to JSON file
+get_next_id(courses) - Generate new course IDs
+Then, implement each API endpoint one at a time, testing as you go!

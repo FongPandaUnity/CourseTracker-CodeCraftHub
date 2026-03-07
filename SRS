@@ -1,0 +1,94 @@
+
+Structure (be concise, ready to implement)
+
+CodeCraftHub/
+app.py # Flask app with API and simple UI routes
+data/
+courses.json # JSON storage (auto-create if missing)
+templates/
+index.html # Minimal UI to list/add/update courses
+static/
+script.js # Frontend logic to call API
+styles.css # Basic styling
+requirements.txt # Flask and dependencies
+README.md # Quick-start and API contract
+Data model (fields)
+
+id: integer
+name: string
+description: string
+target_date: string (YYYY-MM-DD)
+status: string ("Not Started" | "In Progress" | "Completed")
+created_at: string (timestamp)
+API endpoints (must have all four CRUD methods)
+
+POST /api/courses
+Create a new course
+Body: { name, description, target_date, status? }
+Response: 201 with created course
+GET /api/courses
+List all courses
+Response: 200 with array of courses
+GET /api/courses/<id>
+Retrieve one course
+Response: 200 with course or 404 if not found
+PUT /api/courses/<id>
+Full update of a course (all fields required)
+Body: { name, description, target_date, status }
+Response: 200 with updated course or 404
+DELETE /api/courses/<id>
+Delete a course
+Response: 200 with message or 404 Optional bonus endpoints (optional, for practice)
+GET /api/courses/stats
+Basic stats (e.g., count by status)
+GET /api/courses/search?q=term
+Simple text search in name/description
+Storage with JSON (how to store/retrieve)
+
+File: data/courses.json
+If missing, create with []
+Load on each request (read)
+Save after create/update/delete (write)
+Helper ideas (in app.py):
+load_courses(): read and return list
+save_courses(courses): write list back to file
+get_next_id(courses): max id + 1
+Note: simple in-file storage; no concurrency handling needed for learning, but you can add a small file lock if you see race conditions.
+UI plan (basic UI to interact with APIs)
+
+index.html
+Simple form to add a course (name, description, target_date, status)
+A table/list to display courses
+Edit/Delete buttons per row
+script.js
+fetch POST to /api/courses to create
+fetch GET to /api/courses to load
+fetch PUT to /api/courses/<id> to update
+fetch DELETE to /api/courses/<id> to delete
+Update the UI dynamically without page reload
+Minimal CSS in styles.css for readability
+Run instructions (fast start)
+
+Install dependencies:
+pip install -r requirements.txt
+Run the app:
+python app.py
+Open in browser:
+http://localhost:5000/
+Test via UI or curl:
+POST a course to /api/courses
+GET /api/courses
+GET /api/courses/1
+PUT /api/courses/1
+DELETE /api/courses/1
+Starter data (optional)
+
+data/courses.json (empty)
+[]
+Example course (optional to seed)
+[{ "id": 1, "name": "Python Basics", "description": "Learn Python fundamentals", "target_date": "2025-12-31", "status": "Not Started", "created_at": "2025-11-04 10:30:00" }]
+Notes
+
+No authentication required.
+This is a beginner-friendly, single-file-ish API with a tiny front-end.
+If you want, I can provide a compact app.py skeleton or a minimal index.html + script.js to drop in immediately.
