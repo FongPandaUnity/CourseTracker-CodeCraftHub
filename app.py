@@ -1,12 +1,18 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 import json
 import os
 from datetime import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # allow all origins
 
 # Configuration 
 DATA_FILE = 'course.json'
+
+@app.route('/')
+def index():
+    return send_from_directory('.', 'course.html')  # assuming your HTML file is index.html
 
 #Helper function to load course from JSON File
 def load_courses():
